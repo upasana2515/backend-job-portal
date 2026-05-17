@@ -175,7 +175,8 @@ exports.applyJob = async (req, res) => {
     const existing = await Application.findOne({ job: req.params.jobId, user: req.userId });
     if (existing) return res.status(400).json({ message: "You have already applied ❌" });
 
-    const resumeUrl = `http://localhost:5000/uploads/${req.file.filename}`;
+    // const resumeUrl = `http://localhost:5000/uploads/${req.file.filename}`;
+    const resumeUrl = (process.env.BACKEND_URL || "http://localhost:5000") + "/uploads/" + req.file.filename;
 
     const application = await Application.create({
       job: req.params.jobId,
