@@ -15,7 +15,8 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    "https://backend-job-portal-a7gr.vercel.app"
+    "https://backend-job-portal-a7gr.vercel.app",
+    "https://backend-job-portal-livid.vercel.app"
   ],
   credentials: true,
 }));
