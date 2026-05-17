@@ -13,8 +13,12 @@ const app = express();
 
 // CORS must be first
 app.use(cors({
-  origin: "*",
-  credentials: false,
+  origin: [
+    "http://localhost:3000",
+    "https://backend-job-portal-git-main-upasana-projects1.vercel.app",
+    "https://backend-job-portal-livid.vercel.app"
+  ],
+  credentials: true,
 }));
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
