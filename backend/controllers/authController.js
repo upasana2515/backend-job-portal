@@ -23,7 +23,6 @@ exports.register = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -33,27 +32,13 @@ exports.login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid password ❌" });
 
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    user.otp = otp;
-    user.otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
-    await user.save();
+    const token = jwt.sign(
+      { id: user._id, username: user.username, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
 
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    await resend.emails.send({
-      from: "JobHive <onboarding@resend.dev>",
-      to: user.email,
-      subject: "Your JobHive Login OTP",
-      html: `
-        <div style="font-family:sans-serif;max-width:400px;margin:auto;padding:30px;border-radius:12px;border:1px solid #eee">
-          <h2 style="color:#2d6a4f">🌿 JobHive</h2>
-          <p>Your one-time login code is:</p>
-          <h1 style="letter-spacing:8px;color:#2d6a4f">${otp}</h1>
-          <p style="color:#999">Valid for 10 minutes. Do not share this with anyone.</p>
-        </div>
-      `,
-    });
-
-    res.json({ message: "OTP sent to your email ✅", requiresOtp: true, email });
+    res.json({ message: "Login successful ✅", token, role: user.role, username: user.username });
   } catch (err) {
     console.error("Login error:", err.message);
     res.status(500).json({ error: err.message });
