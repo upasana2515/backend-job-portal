@@ -839,7 +839,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+// import { GoogleGenerativeAI } from "@google/generative-ai";
 
 import API from "../api/api";
 import Navbar from "../components/Navbar";
@@ -848,9 +848,9 @@ function Dashboard() {
 
   const navigate = useNavigate();
 
-  const genAI = new GoogleGenerativeAI(
-    process.env.REACT_APP_GEMINI_API_KEY
-  );
+  // const genAI = new GoogleGenerativeAI(
+  //   process.env.REACT_APP_GEMINI_API_KEY
+  // );
 
   // STATES
   const [jobs, setJobs] = useState([]);
