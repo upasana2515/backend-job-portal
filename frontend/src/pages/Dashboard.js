@@ -6,10 +6,8 @@ import API from "../api/api";
 import Navbar from "../components/Navbar";
 
 function Dashboard() {
-
   const navigate = useNavigate();
 
-  
 
   // STATES
   const [jobs, setJobs] = useState([]);
