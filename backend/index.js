@@ -60,7 +60,13 @@ const aiRoutes = require("./routes/aiRoutes");
 const app = express();
 
 // CORS must be first
-app.use(cors({ origin: ["http://localhost:3000", "https://jobhive.vercel.app"], credentials: true }));
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://backend-job-portal-a7gr.vercel.app"
+  ],
+  credentials: true,
+}));
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
