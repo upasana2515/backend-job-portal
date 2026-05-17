@@ -13,11 +13,7 @@ const app = express();
 
 // CORS must be first
 app.use(cors({
-  origin: [
-    "http://localhost:3000",
-    "https://backend-job-portal-git-main-upasana-projects1.vercel.app",
-    "https://backend-job-portal-livid.vercel.app"
-  ],
+  origin: true,
   credentials: true,
 }));
 app.use(express.json());
