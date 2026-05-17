@@ -215,6 +215,15 @@ useEffect(() => {
   }
 };
 
+const updateAppStatus = async (id, status) => {
+  try {
+    await API.patch(`/apply/${id}/status`, { status });
+    fetchData();
+  } catch (err) {
+    alert(err.response?.data?.message || "Failed to update status");
+  }
+};
+
   return (
     <div className="min-h-screen bg-secondary">
       <Navbar />
@@ -340,12 +349,24 @@ useEffect(() => {
                     {app.job?.company && <span>🏢 {app.job.company}</span>}
                     <span>📅 {new Date(app.appliedAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}</span>
                   </div>
-                  <a href={app.resumeUrl} target="_blank" rel="noreferrer"
-                    className="inline-flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-xl text-sm font-semibold hover:opacity-90 transition"
-                  >
+                  <a href={app.resumeUrl?.replace("/image/upload/", "/raw/upload/")} target="_blank" rel="noreferrer"
+                  className="inline-flex items-center gap-2 bg-gray-50 border border-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium hover:bg-primary hover:text-white hover:border-primary transition"
+                >
                     📄 View Resume
                   </a>
-                </div>
+                   <button onClick={() => updateAppStatus(app._id, "reviewed")}
+    className="bg-blue-50 text-blue-600 px-4 py-2 rounded-xl text-sm font-semibold hover:bg-blue-100 transition">
+    👀 Mark Reviewed
+  </button>
+  <button onClick={() => updateAppStatus(app._id, "rejected")}
+    className="bg-red-50 text-red-500 px-4 py-2 rounded-xl text-sm font-semibold hover:bg-red-100 transition">
+    ❌ Reject
+  </button>
+  <button onClick={() => updateAppStatus(app._id, "pending")}
+    className="bg-yellow-50 text-yellow-600 px-4 py-2 rounded-xl text-sm font-semibold hover:bg-yellow-100 transition">
+    ⏳ Reset
+  </button>
+</div>
               ))}
             </div>
           )

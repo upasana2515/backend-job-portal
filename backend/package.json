@@ -10,6 +10,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.96.0",
+    "@google/generative-ai": "^0.24.1",
     "bcryptjs": "^3.0.3",
     "cloudinary": "^2.9.0",
     "cors": "^2.8.6",
@@ -19,6 +21,7 @@
     "mongodb": "^7.2.0",
     "mongoose": "^8.23.1",
     "multer": "^2.0.2",
+    "nodemailer": "^8.0.7",
     "react": "^19.2.6",
     "streamifier": "^0.1.1"
   },

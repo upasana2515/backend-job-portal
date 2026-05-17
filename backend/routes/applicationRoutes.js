@@ -87,11 +87,27 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
 const upload = require("../middleware/upload");
-const { applyJob, getMyApplications, getApplications, checkApplied } = require("../controllers/applicationController");
+const {
+  applyJob,
+  getMyApplications,
+  getApplications,
+  checkApplied,
+  updateStatus,
+  deleteApplication,
+} = require("../controllers/applicationController");
 
 router.get("/my", auth, getMyApplications);
 router.get("/check/:jobId", auth, checkApplied);
 router.get("/", getApplications);
-router.post("/:jobId", auth, upload.single("resume"), applyJob);
+
+router.post("/:jobId", auth, (req, res, next) => {
+  upload.single("resume")(req, res, (err) => {
+    if (err) return res.status(400).json({ message: err.message });
+    next();
+  });
+}, applyJob);
+
+router.patch("/:id/status", auth, updateStatus);
+router.delete("/:id", auth, deleteApplication);
 
 module.exports = router;

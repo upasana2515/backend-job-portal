@@ -84,6 +84,16 @@ function MyApplications() {
       .finally(() => setLoading(false));
   }, []);
 
+  const deleteApp = async (id) => {
+  if (!window.confirm("Withdraw this application?")) return;
+  try {
+    await API.delete(`/apply/${id}`);
+    setApps(apps.filter(a => a._id !== id));
+  } catch (err) {
+    alert(err.response?.data?.message || "Failed to withdraw");
+  }
+};
+
   return (
     <div className="min-h-screen bg-secondary">
       <Navbar />
@@ -139,11 +149,16 @@ function MyApplications() {
                   <span>📅 {new Date(app.appliedAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}</span>
                 </div>
 
-                <a href={app.resumeUrl} target="_blank" rel="noreferrer"
+                <a href={app.resumeUrl?.replace("/image/upload/", "/raw/upload/")} target="_blank" rel="noreferrer"
                   className="inline-flex items-center gap-2 bg-gray-50 border border-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium hover:bg-primary hover:text-white hover:border-primary transition"
                 >
                   📄 View Resume
                 </a>
+                  <button onClick={() => deleteApp(app._id)}
+    className="inline-flex items-center gap-2 bg-red-50 text-red-500 px-4 py-2 rounded-xl text-sm font-medium hover:bg-red-100 transition">
+    🗑️ Withdraw
+  </button>
+
               </div>
             ))}
           </div>
