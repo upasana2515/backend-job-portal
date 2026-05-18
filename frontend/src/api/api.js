@@ -58,13 +58,10 @@
 
 // export default API;
 
-
 import axios from "axios";
 
 const API = axios.create({
-  baseURL:
-    process.env.REACT_APP_API_URL ||
-    "http://localhost:5000/api",
+  baseURL: "https://jobhive-backend-3loy.onrender.com/api",
 });
 
 API.interceptors.request.use((req) => {
