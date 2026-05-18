@@ -15,9 +15,15 @@ const app = express();
 
 // CORS must be first
 app.use(cors({
-  origin: true,
+  origin: [
+    "http://localhost:3000",
+    "https://backend-job-portal-a7gr.vercel.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
+app.options("*", cors());
+
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
@@ -39,4 +45,5 @@ if (process.env.NODE_ENV !== "test") {
   });
 }
 
+module.exports.handler = app;
 module.exports = app;
