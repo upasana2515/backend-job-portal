@@ -61,7 +61,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://jobhive-backend-3loy.onrender.com/api",
+  baseURL: "https://jobhive-backend-3loy.onrender.com/api/api",
 });
 
 API.interceptors.request.use((req) => {
