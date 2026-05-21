@@ -17,7 +17,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    "https://backend-job-portal-a7gr.vercel.app"
+    "https://backend-job-portal-a7gr-qgjsnna4i-upasana-projects1.vercel.app"
   ],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   credentials: true,
