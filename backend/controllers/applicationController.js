@@ -202,7 +202,6 @@ exports.getMyApplications = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
 exports.getApplications = async (req, res) => {
   try {
     const applications = await Application.find()
