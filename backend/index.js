@@ -19,7 +19,7 @@ app.use(cors({
     "http://localhost:3000",
     "https://backend-job-portal-a7gr.vercel.app"
   ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   credentials: true,
 }));
 
