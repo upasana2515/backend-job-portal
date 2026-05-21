@@ -14,11 +14,16 @@ const aiRoutes = require("./routes/aiRoutes");
 const app = express();
 
 // CORS must be first
+// app.use(cors({
+//   origin: [
+//     "http://localhost:3000",
+//     "https://backend-job-portal-a7gr.vercel.app"
+//   ],
+//   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+//   credentials: true,
+// }));
 app.use(cors({
-  origin: [
-    "http://localhost:3000",
-    "https://backend-job-portal-a7gr-qgjsnna4i-upasana-projects1.vercel.app"
-  ],
+  origin: true,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   credentials: true,
 }));
